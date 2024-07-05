@@ -16,10 +16,10 @@ window.onload = function () {
     idInput = idDiv.firstElementChild;
     passInput = passDiv.firstElementChild;
     chrome.storage.sync.get([IDKey, PassKey], function (key) {
+        if (key[IDKey] == undefined)
+            return;
         idInput.value = key[IDKey];
         passInput.value = key[PassKey];
-        console.log(key[IDKey]);
-        console.log(key[PassKey]);
     });
 };
 window.onbeforeunload = function () {
