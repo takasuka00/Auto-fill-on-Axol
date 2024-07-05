@@ -1,8 +1,8 @@
 {
-  "name": "Auto-fillOnAxio",
+  "name": "Auto-fill on job.axol.jp",
   "version": "1.0.0",
   "manifest_version": 3,
-  "description": "企業の就活用マイページに自動でID・パスワードを入力する",
+  "description": "企業の就活用マイページに自動でID・パスワードを入力します。",
   "permissions": [
     "storage"
   ],
