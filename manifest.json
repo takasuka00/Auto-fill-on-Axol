@@ -1,0 +1,15 @@
+{
+  "name": "Auto-fillOnAxio",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "description": "企業の就活用マイページに自動でID・パスワードを入力する",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [{
+    "matches": ["https://job.axol.jp/qd/s/*/mypage/login*"],
+    "js": [
+      "scripts/content.js"
+    ]
+  }]
+}
