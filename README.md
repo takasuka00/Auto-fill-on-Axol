@@ -1,8 +1,9 @@
 # Auto-fillOnAxol
-image or gif
+
 
 ## Overview
-
+企業の就活マイページによく用いられるjob.axol.jpのパスワードマネージャーです。
+chromeのパスワードマネージャーで複数の候補から選ぶ必要がなくなります。
 
 ## Requirement
 
