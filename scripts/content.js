@@ -3,8 +3,9 @@ let IDKey;
 let PassKey;
 let idInput;
 let passInput;
-window.onload = function () {
-    const companyName = window.location.href.split("/")[5];
+const url = window.location.href;
+const axolLoadFun = () => {
+    const companyName = url.split("/")[5];
     IDKey = companyName + "_ID";
     PassKey = companyName + "_Pass";
     const idDiv = document.querySelector('.origin__id');
@@ -22,6 +23,31 @@ window.onload = function () {
         passInput.value = key[PassKey];
     });
 };
+const jpnLoadFun = () => {
+    const companyName = url.split("/")[2];
+    IDKey = companyName + "_ID";
+    PassKey = companyName + "_Pass";
+    idInput = document.querySelector('#gksid');
+    passInput = document.querySelector('.gkspw');
+    console.log(IDKey);
+    console.log(idInput.value);
+    chrome.storage.sync.get([IDKey, PassKey], function (key) {
+        if (key[IDKey] == undefined)
+            return;
+        idInput.value = key[IDKey];
+        passInput.value = key[PassKey];
+    });
+};
+if (url.match(/^https?:\/\/job\.axol\.jp\/qd\/s\//) != null) { //https://job.axol.jp/qd/s/
+    window.onload = axolLoadFun;
+    console.log("axol");
+}
+else if (url.match(/^https?:\/\/.*\/jpn\.com\//) != null) { //https://*.jpn.com
+    window.onload = jpnLoadFun;
+    console.log("jpn");
+}
+else
+    console.log(url);
 window.onbeforeunload = function () {
     chrome.storage.sync.set({ [IDKey]: idInput.value, [PassKey]: passInput.value }, function () {
     });
