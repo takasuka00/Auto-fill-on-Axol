@@ -24,7 +24,7 @@ const axolLoadFun = () => {
     });
 };
 const jpnLoadFun = () => {
-    const companyName = url.split("/")[2];
+    const companyName = url.split("/")[2].replace("\.", "_").split("\.")[0];
     IDKey = companyName + "_ID";
     PassKey = companyName + "_Pass";
     idInput = document.querySelector('#gksid');
@@ -38,17 +38,18 @@ const jpnLoadFun = () => {
         passInput.value = key[PassKey];
     });
 };
+const transitionFunc = () => {
+    console.log();
+    chrome.storage.sync.set({ [IDKey]: idInput.value, [PassKey]: passInput.value }, function () { });
+};
 if (url.match(/^https?:\/\/job\.axol\.jp\/qd\/s\//) != null) { //https://job.axol.jp/qd/s/
     window.onload = axolLoadFun;
     console.log("axol");
 }
-else if (url.match(/^https?:\/\/.*\/jpn\.com\//) != null) { //https://*.jpn.com
+else if (url.match(/^https?:\/\/.*\.jpn\.com\//) != null) { //https://*.jpn.com
     window.onload = jpnLoadFun;
     console.log("jpn");
 }
 else
     console.log(url);
-window.onbeforeunload = function () {
-    chrome.storage.sync.set({ [IDKey]: idInput.value, [PassKey]: passInput.value }, function () {
-    });
-};
+window.onbeforeunload = transitionFunc;
